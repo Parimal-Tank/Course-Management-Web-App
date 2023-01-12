@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Course Management Web App</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link href="/assets/style.css" rel="stylesheet" type="text/css">
+  <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> -->
+  <!-- <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script> -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+
+<body>
+
+  <div class="btn-custom">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
+      data-whatever="@getbootstrap">Add Course</button>
+  </div>
+
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add Course</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="course-name" name="courseName" class="col-form-label">Course Name:</label>
+              <input type="text" class="form-control" id="course-name">
+            </div>
+            <div class="form-group">
+              <label for="course-duration" class="col-form-label">Course Duration:</label>
+              <input type="text" name="courseDuration" class="form-control" id="course-duration">
+            </div>
+            <div class="form-group">
+              <label for="course-fee" class="col-form-label">Course Fees</label>
+              <input type="number" name="courseFees" class="form-control" id="course-fee">
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <ul>
+        <% for(let i=0 ; i< course.length; i++){ %>
+          <li><%= course[i].courseName %></li>
+          <li><%= course[i].courseDuration %></li>
+          <li><%= course[i].courseFees %></li>
+        <% } %>
+      </ul> -->
+
+      <div class="row card-customes ">
+  <% for(let i=0 ; i< course.length; i++){ %>   
+      <div class="card  col-xl-3 col-lg-4 col-md-6 col-sm-12 card-custom" style="width: 18rem;">
+        <div class="card-body">
+          <h4 class="card-title">Course Name :<%= course[i].courseName %></h4>
+              <p class="card-text">Course Duration :<%= course[i].courseDuration %></p>
+              <p class="card-text">Course Fees : <%= course[i].courseFees %>₹</p>
+              <button href="#" class="editbtn btn btn-md btn-primary" value="<%= course[i].id %>">Edit</button>
+              <button href="" class='dltbtn btn btn-md btn-danger' value="<%= course[i].id %>">Delete</button>
+        </div>
+      </div>
+    <% } %>
+  </div>
+
+      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+      <script>
+        $(document).ready(function () {
+
+          $('form').on('submit', function () {
+
+            let courseName = $('#course-name');
+            let courseDuration = $('#course-duration');
+            let courseFees = $('#course-fee');
+            let courses = { courseName: courseName.val(), courseDuration: courseDuration.val(), courseFees: courseFees.val() };
+            console.log(courses);
+            $.ajax({
+              type: 'POST',
+              url: '/api/courses/addCourse',
+              data: courses,
+
+              success: function (data) { 
+                //do something with the data via front-end framework
+                // window.href();
+                location.reload();
+                // console.log(data);
+              }, 
+              error: function (err) {
+                console.log('sfdfdgdf', err);
+              }
+            });
+            // return false;
+          });
+
+           $(".dltbtn").on('click', function (courses) {
+            
+            let id = $(this).val();
+             console.log(id);
+             $.ajax({ 
+               type: "DELETE",
+               url: `/api/courses/${id}`,
+               success: function (data) {
+                 //do something with the data via front-end framework
+                 //   location.reload();
+                 location.href = "/api/courses/allCourses";
+               },
+             });
+           });
+
+
+
+
+           $(".editbtn").on('click', function (courses) {
+            
+            let id = $(this).val();
+             console.log(id);
+             $.ajax({ 
+               type: "PUT",
+               url: `/api/courses/${id}`,
+               success: function (data) {
+                 //do something with the data via front-end framework
+                 //   location.reload();
+                 location.href = "/api/courses/allCourses";
+               },
+             });
+           });
+        });
+      </script>
+</body>
+</html>

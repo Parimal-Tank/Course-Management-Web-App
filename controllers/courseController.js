@@ -6,7 +6,7 @@ const Course = db.courses;
 
 const addCourse = async (req , res) =>{
  
-    console.log(req.body);
+     console.log(req.body);
 
     let courseInfo = {
         courseName : req.body.courseName,
@@ -14,14 +14,19 @@ const addCourse = async (req , res) =>{
         courseFees : req.body.courseFees
     }
     const course = await Course.create(courseInfo);
-    res.status(200).send(course);
+    console.log(course);
+
+    res.render('courses',{course: course});
+    // res.status(200).send(course);
 }
 
 // get all courses
 
 const getAllCourse = async (req, res) =>{
     let course = await Course.findAll({})
-    res.status(200).send(course);
+    //  res.status(200).send(course);
+    // res.status(200).send({course: course});
+    res.render('courses',{course: course});
 }
 
 // get single course
