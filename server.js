@@ -8,15 +8,6 @@ app.set('view engine' , 'ejs');
 //static files
 app.use(express.static('./public'));
 
-
-// const bodyparser = require('body-parser')
-// const cors = require('cors')
-
-// const corOption ={
-//     origin: 'https://localhost:8081'
-// }
-// app.use(cors(corOption));
-
 // Router 
 const router = require('./routes/courseRoute');
 app.use('/api/courses' , router);

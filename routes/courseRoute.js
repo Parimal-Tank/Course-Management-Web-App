@@ -2,13 +2,8 @@ const courseController = require("../controllers/courseController");
 
 const router = require('express').Router();
 
-// router.get('/' , function(req , res){
-//     res.render('index');
-//   })  
-
 router.post('/addCourse' , courseController.addCourse);
 router.get('/allCourses' , courseController.getAllCourse);
-
 
 router.get('/:id' , courseController.getOneCourse)
 

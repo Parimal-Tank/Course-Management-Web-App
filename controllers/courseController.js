@@ -41,10 +41,12 @@ const getOneCourse = async (req, res) =>{
 
 const updateCourse = async (req, res) =>{
     let id = req.params.id;
+    console.log(req.body);
+    console.log(id);
     
     const course = await Course.update(req.body , {where : { id:id}})
-
-    res.status(200).send(course)
+    res.render('courses',{course: course});
+    // res.status(200).send(course)
 }   
 
 // delete course by id
