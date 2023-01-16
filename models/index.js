@@ -10,7 +10,7 @@ const sequelize = new Sequelize(
         dialect: dbConfig.dialect,
         operatorAliases : false,
 
-
+        // Used for database security // for Resouces access permission or the number of connection.
         pool: {
             max: dbConfig.pool.max,
             min: dbConfig.pool.min,

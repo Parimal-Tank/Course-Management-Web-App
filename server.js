@@ -8,7 +8,7 @@ app.set('view engine' , 'ejs');
 //static files
 app.use(express.static('./public'));
 
-// Router 
+// Default Router 
 const router = require('./routes/courseRoute');
 app.use('/api/courses' , router);
 
