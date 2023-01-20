@@ -13,7 +13,7 @@ const router = require('./routes/courseRoute');
 app.use('/api/courses' , router);
 
 // server
-const server = process.env.PORT || 3000;
+const server = process.env.PORT || 5000;
 app.listen(5000 , () => {
     console.log('Server is started...' + server);
   });

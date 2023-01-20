@@ -16,17 +16,15 @@ const addCourse = async (req , res) =>{
     const course = await Course.create(courseInfo);
     console.log(course);
 
-    res.render('courses',{course: course});
-    // res.status(200).send(course);
+    return res.redirect('/api/courses/allCourses');
 }
 
 // get all courses
 
 const getAllCourse = async (req, res) =>{
     let course = await Course.findAll({})
-    //  res.status(200).send(course);
-    // res.status(200).send({course: course});
-    res.render('courses',{course: course});
+
+    return res.render('courses',{course: course});
 }
 
 // get single course

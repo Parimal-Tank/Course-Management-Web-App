@@ -8,6 +8,7 @@ const sequelize = new Sequelize(
     dbConfig.PASSWORD,{
         host: dbConfig.HOST,
         dialect: dbConfig.dialect,
+        port: dbConfig.PORT,
         operatorAliases : false,
 
         // Used for database security // for Resouces access permission or the number of connection.
@@ -15,10 +16,21 @@ const sequelize = new Sequelize(
             max: dbConfig.pool.max,
             min: dbConfig.pool.min,
             acquire : dbConfig.pool.acquire,
-            idle: dbConfig.pool.idel
+            idle: dbConfig.pool.idle
         }
     }
 )
+
+// const sequelize = new Sequelize({ 
+//     host: dbConfig.HOST,
+//     port: dbConfig.PORT,
+//     username: dbConfig.USER,
+//     password: dbConfig.PASSWORD,
+//     database: dbConfig.DB,
+//     dialect: dbConfig.dialect,
+//  })
+
+// const sequelize = new Sequelize('mysql://parimalta:002fAR367LnXiXRNGYyX6y0X@15.206.7.200:3310/parimalta')
 
 
 sequelize.authenticate().then(() =>{
