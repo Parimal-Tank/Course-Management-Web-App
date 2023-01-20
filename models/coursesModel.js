@@ -18,14 +18,4 @@ const Course = sequelize.define('Course' , {
 })
 return Course;
 }
-    
-
-//Using Only Mysql
-
-// const courseTable = "Use CourseManagementDB CREATE TABLE IF NOT EXISTS Courses (courseName VARCHAR(255) , courseDuration VARCHAR(255) , courseFess INTEGER(10))";
-
-//   con.query(courseTable , function(err , result){
-//     if(err) throw err;
-//     console.log("Table Created");
-// })
 
